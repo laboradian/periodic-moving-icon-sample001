@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"  >
+  <!--  Font Awesome の CDN  -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <title>定期的に動く画像のサンプル001</title>
+</head>
+<body>
+
+  <header>
+    <h1>定期的に動く画像のサンプル001</h1>
+  </header>
+
+  <div class="well">
+    <p>CSSアニメーションを使っている。</p>
+    <ul>
+      <li><code>window.requestAnimationFrame()</code> で定期的に、animationをセットしたCSSクラスをトグルしている。</li>
+      <li>CSSアニメーションだけでもできなくはないが、制御しづらい。</li>
+    </ul>
+  </div>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">デモ</div>
+    <div class="panel-body">
+      <section class="lr-container">
+        <div>
+          <p>(1)</p>
+          <img id="targetIcon1" class="lr-icon" src="img/icon.png" />
+        </div>
+        <div>
+          <p>(2)</p>
+          <img id="targetIcon2" class="lr-icon" src="img/icon.png" />
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="panel panel-success">
+    <div class="panel-heading">(1)に関するコード</div>
+    <div class="panel-body">
+      <h4>HTML</h4>
+      <pre><code>&lt;img id="targetIcon1" src="img/icon.png" /&gt;</code></pre>
+      <h4>CSS</h4>
+      <pre><code>.shake1 {
+  animation: shake1 0.1s linear;
+}
+
+@keyframes shake1 {
+  0%   { transform: translate(2px,  0px); }
+  50%  { transform: translate(-4px, 0px); }
+  100% { transform: translate(2px,  0px); }
+}</code></pre>
+
+      <h4>JavaScript</h4>
+      <pre><code>/**
+ * DOM要素を定期的にアニメーションする。
+ * @param {object} elm - DOM element
+ * @param {string} className - CSS class name
+ * @param {number} speed - 何秒おきに動くか
+ */
+const addPeriodicMoving = (elm, className, speed) =&gt; {
+  let cnt = 0;
+  const loop = () =&gt; {
+    if (cnt % parseInt(speed*30) === 0) {
+      elm.classList.toggle(className);
+    }
+    cnt++;
+    window.requestAnimationFrame(loop);
+  };
+  window.requestAnimationFrame(loop);
+};
+
+addPeriodicMoving(
+  document.querySelector('#targetIcon1'),
+  'shake1',
+  4
+);</code></pre>
+    </div>
+  </div>
+
+  <div class="well">
+    <p>参考</p>
+    <ul>
+      <li><a href="https://developer.mozilla.org/en/docs/Web/CSS/animation">animation - CSS | MDN</a></li>
+    </ul>
+
+    <p>ソースコードはこちら</p>
+    <ul>
+      <li><a href="https://github.com/laboradian/periodic-moving-icon-sample001">laboradian/periodic-moving-icon-sample001</a></li>
+    </ul>
+  </div>
+
+  <hr>
+  <footer>© 2017 <a href="http://laboradian.com/">Laboradian</a></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <script src="js/main.js" charset="utf-8"></script>
+</body>
+</html>

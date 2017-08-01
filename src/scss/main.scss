@@ -1,0 +1,52 @@
+@import './bootstrap-variables';
+@import './bootstrap-custom';
+
+body {
+  padding: 20px;
+}
+
+footer {
+  text-align: right;
+}
+
+.lr-icon {
+  margin-right: 30px;
+}
+
+.lr-container {
+  & > div {
+    display: inline-block;
+  }
+}
+
+.shake1 {
+  animation: shake1 0.1s linear;
+}
+
+.shake2 {
+  animation: shake2 0.2s linear infinite;
+}
+
+@keyframes shake1 {
+  0%   { transform: translate(2px,  0px); }
+  50%  { transform: translate(-4px, 0px); }
+  100% { transform: translate(2px,  0px); }
+}
+
+/*
+ * 引用元：ワンポイントに使えるCSS3マウスオーバーアニメーション5種 | webOpixel
+ *      http://www.webopixel.net/html-css/831.html
+ */
+@keyframes shake2 {
+  0%   { transform: translate(3px, 2px)   rotate(0deg); }
+  10%  { transform: translate(-2px, -3px) rotate(-1deg); }
+  20%  { transform: translate(-4px, 0px)  rotate(1deg); }
+  30%  { transform: translate(0px, 3px)   rotate(0deg); }
+  40%  { transform: translate(2px, -2px)  rotate(1deg); }
+  50%  { transform: translate(-2px, 3px)  rotate(-1deg); }
+  60%  { transform: translate(-4px, 2px)  rotate(0deg); }
+  70%  { transform: translate(3px, 2px)   rotate(-1deg); }
+  80%  { transform: translate(-2px, -2px) rotate(1deg); }
+  90%  { transform: translate(2px, 4px)   rotate(0deg); }
+  100% { transform: translate(2px, -3px)  rotate(-1deg); }
+}
